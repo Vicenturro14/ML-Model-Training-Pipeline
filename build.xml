@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="g10-pipeline" basedir="." default="dist">
+   <property name="name" value="g10-pipeline" />
+   <property name="src" value="src" />
+   <property name="version" value="" />
+   <property name="dist" value="dist" />
+	
+   <path id="classpath">
+      <fileset dir="lib">
+         <include name="*.jar" />
+      </fileset>
+   </path>
+	
+   <target name="prepare">
+      <tstamp />
+      <mkdir dir="bin" />
+      <mkdir dir="dist" />
+   </target>
+	
+   <target name="dist" depends="clean,prepare">
+      <javac destdir="bin" srcdir="src" includes="org/mdp/**" source="1.8" target="1.8" debug="true" debuglevel="lines,source">
+         <classpath refid="classpath" />
+      </javac>
+      <!--
+    <copy file="src/com/ontologycentral/ldspider/tld/tld.dat" tofile="bin/com/ontologycentral/ldspider/tld/tld.dat"> </copy>
+    -->
+      <jar jarfile="${dist}/${name}.jar" basedir="bin">
+         <manifest>
+            <attribute name="Main-Class" value="org.mdp.g10.Main" />
+         </manifest>
+      	 <zipfileset src="lib/kafka-clients-2.0.0.jar" />
+      	 <zipfileset src="lib/slf4j-api-1.7.25.jar" />
+      	 <zipfileset src="lib/slf4j-simple-1.7.25.jar" />
+      	 <zipfileset src="lib/jackson-annotations-2.9.0.jar" />
+      	 <zipfileset src="lib/jackson-core-2.9.6.jar" />
+      	 <zipfileset src="lib/jackson-databind-2.9.6.jar" />
+      </jar>
+   </target>
+	
+   <target name="clean">
+      <delete dir="bin" />
+      <delete>
+         <fileset dir="dist">
+            <include name="*.jar" />
+         </fileset>
+      </delete>
+   </target>
+	
+</project>
