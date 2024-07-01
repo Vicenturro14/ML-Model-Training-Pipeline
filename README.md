@@ -1,5 +1,31 @@
 ﻿# MDP Project G10: ML model training pipeline
 
+Para ejecutar el pipeline completo, se requiere abrir 4 terminales, conectarlas al servidor del curso, y correr los siguientes comandos.
+
+#### Terminal 1
+```bash
+cd projects/group_10
+python3 retrain_model.py g10-clean
+```
+
+#### Terminal 2
+```bash
+cd projects/group_10
+python3 clean_text.py g10-abstract-category g10-clean
+```
+
+#### Terminal 3
+```bash
+cd projects/group_10
+java -jar g10-pipeline.jar PropertiesSelector g10-papers g10-abstract-category
+```
+
+#### Terminal 4
+```bash
+cd projects/group_10
+java -jar g10-pipeline.jar ArxivSimulator arxiv-metadata-oai-snapshot.json g10-papers
+```
+
 ## Uso de g10-pipeline.jar
 Este archivo compilado se debe ejecutar por consola entregando como argumentos la clase a ejecutar y los argumentos que recibe la clase.
 ```
