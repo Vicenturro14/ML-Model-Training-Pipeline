@@ -4,26 +4,22 @@ Para ejecutar el pipeline completo, se requiere abrir 4 terminales, conectarlas 
 
 #### Terminal 1
 ```bash
-cd projects/group_10
-python3 retrain_model.py g10-clean
+cd projects/group_10; python3 retrain_model.py g10-clean
 ```
 
 #### Terminal 2
 ```bash
-cd projects/group_10
-python3 clean_text.py g10-abstract-category g10-clean
+cd projects/group_10; python3 clean_text.py g10-abstract-category g10-clean
 ```
 
 #### Terminal 3
 ```bash
-cd projects/group_10
-java -jar g10-pipeline.jar PropertiesSelector g10-papers g10-abstract-category
+cd projects/group_10; java -jar g10-pipeline.jar PropertiesSelector g10-papers g10-abstract-category
 ```
 
 #### Terminal 4
 ```bash
-cd projects/group_10
-java -jar g10-pipeline.jar ArxivSimulator arxiv-metadata-oai-snapshot.json g10-papers
+cd projects/group_10; java -jar g10-pipeline.jar ArxivSimulator arxiv-metadata-oai-snapshot.json g10-papers
 ```
 
 ## Uso de g10-pipeline.jar
