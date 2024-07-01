@@ -59,11 +59,11 @@ La clase recibe como argumentos los nombres de los topics de entrada y salida re
 python clean_text.py [input_topic] [output_topic]
 ```
 
-### finetune_model.py
+### retrain_model.py
 #### Descripción
 Recibe el abstract limpio y el label enviados por clean_text.py con el formato "abstract;;label", recolecta varios de estos records en una lista, y al cumplir un número N de ejemplos los junta formando un dataframe con el que se reentrena un modelo de ML, un DecisionTreeClassifier que predice si una publicación es o no de computer science.
 #### Uso
 La clase recibe como argumento el tópico de input por donde se enviarán los datos. Se asume que existe un dataset con datos de testing en la ruta ./test_data.csv, un vectorizador en ./vectorizer.pkl, y un modelo de machine learning en ./pretrained_model.pkl.
 ```
-python finetune_model.py [input_topic]
+python retrain_model.py [input_topic]
 ```
