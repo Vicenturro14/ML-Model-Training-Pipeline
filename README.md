@@ -46,3 +46,24 @@ La clase recibe como argumentos los nombres de los topics de entrada y salida re
 ```
 java -jar PropertiesSelector [input_topic] [output_topic]
 ```
+
+### clean_text.py
+#### Descripción
+Recibe el abstract y la categoria en formato de texto y concatenados con ";;", y realiza 2 tareas principales de procesamiento:
+1. Procesa el texto sacando las stopwords (un conjunto de palabras muy comunmente usadas en un lenguaje), los caracteres especiales y dejando todo en minúsculas.
+2. Procesa las categorías de tal forma que si alguna de estas es de ciencias de la computación (ie. tiene una categoría que empieza por "cs."), entonces deja una variable label con un 1. En caso contrario dejará label con un 0.
+Luego de procesar el abstract y las categorías, las concatena como texto, y las envía al topico de salida con el formato "abstract_limpio;;label".
+#### Uso
+La clase recibe como argumentos los nombres de los topics de entrada y salida respectivamente. Se espera que los records recibidos traigan como valor un texto de la forma "abstract;;categorias", donde estos deben estar asociados una misma publicación.
+```
+python clean_text.py [input_topic] [output_topic]
+```
+
+### finetune_model.py
+#### Descripción
+Recibe el abstract limpio y el label enviados por clean_text.py con el formato "abstract;;label", recolecta varios de estos records en una lista, y al cumplir un número N de ejemplos los junta formando un dataframe con el que se reentrena un modelo de ML, un DecisionTreeClassifier que predice si una publicación es o no de computer science.
+#### Uso
+La clase recibe como argumento el tópico de input por donde se enviarán los datos. Se asume que existe un dataset con datos de testing en la ruta ./test_data.csv, un vectorizador en ./vectorizer.pkl, y un modelo de machine learning en ./pretrained_model.pkl.
+```
+python finetune_model.py [input_topic]
+```
